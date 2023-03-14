@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Kolokwium.ViewModel.ViewModels.ClientVm>
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer viewLocalizer
+
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+    <p>
+        <a asp-action="Create">Create new</a>
+    </p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adress)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @Html.ActionLink(viewLocalizer["Edit"].Value, "Edit", new { id=item.Id }) |
+                @Html.ActionLink(viewLocalizer["Details"].Value, "Details", new { id=item.Id }) |
+                @Html.ActionLink(viewLocalizer["Delete"].Value, "Delete", new { id=item.Id })
+                @Html.ActionLink(viewLocalizer["AddCheckInToClient"].Value, "AddCheckInToClient", new { Clientid=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
